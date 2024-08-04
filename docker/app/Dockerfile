@@ -42,6 +42,10 @@ RUN apt-get update && apt-get install -y \
 RUN pecl install xdebug-3.1.5 && \
     docker-php-ext-enable xdebug
 
+# Node.jsとnpmのインストール
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs
+
 # modRewriteを有効化する
 RUN mv /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled
 RUN /bin/sh -c a2enmod rewrite
