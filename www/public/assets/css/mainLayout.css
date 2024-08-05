@@ -1,0 +1,11 @@
+body {
+    font-family: "Hiragino Sans", Meiryo, sans-serif;
+}
+
+.message-box {
+    height: 800px;
+}
+
+.inner-container {
+    width: 80%;
+}
