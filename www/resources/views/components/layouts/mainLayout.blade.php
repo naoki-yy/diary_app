@@ -18,15 +18,30 @@
 
 <body>
     <header>
-        <div style="height: 100px; background-color: #54adff;">
-            <div class="fs-1 fw-bold text-light pt-3 ps-3">ココロ Diary . . .</div>
+        <div class="d-flex align-items-center justify-content-between"
+            style="height: 100px; background-color: #ff8484;">
+            <div class="fs-2 fw-bold text-light ps-3 ms-3">ココロ Diary . . .</div>
+            <ul class="nav me-4">
+                <li class="nav-item">
+                    <a class="nav-link active text-white" href="#" aria-current="page">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white">Disabled</a>
+                </li>
+            </ul>
         </div>
     </header>
     <main>
         {{ $slot }}
     </main>
     <footer>
-        <div style="height: 50px; background-color: #54adff;">
+        <div style="height: 50px; background-color: #ff8484;">
             <div>&copy ココロDiary</div>
         </div>
     </footer>
