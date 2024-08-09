@@ -14,5 +14,7 @@ class DiaryService
         $diary->user_id = Auth::user()->id;
         $diary->emotion_point = $request->emotion_point;
         $diary->content = $request->content;
+
+        $diary->save();
     }
 }

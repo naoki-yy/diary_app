@@ -1,5 +1,8 @@
 <x-layouts.mainLayout>
     <div class="container">
+        <div class="my-2">
+            <x-error-success-message :$errors />
+        </div>
         <div class="border border-dark mt-3">
             <div class="d-flex align-items-center justify-content-center mt-3 mb-2">
                 <img src="{{ asset('assets/images/kokoro.png') }}" alt="logo" width="32px" height="32px">
@@ -38,21 +41,61 @@
         </div>
         <div class="d-flex my-3 message-box">
             <div class="flex-fill border border-dark p-0">
-                <div class="border-bottom border-black py-2 text-center mb-3">
+                <div class="border-bottom border-black py-2 text-center">
                     <div class="fw-bold fs-4">userB</div>
                 </div>
-                <div class="inner-container mt-4 mx-auto">
-                    <div class="bg-secondary">a</div>
+                <div class="inner-container w-full">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <td>日付</td>
+                            <td>感情ポイント</td>
+                            <td>出来事・気持ち</td>
+                        </thead>
+                        <tbody>
+                            @foreach ($diaries as $diary)
+                                <tr>
+                                    <td>
+                                        <span>{{ $diary->formatted_date }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ $diary->emotion_point }}点</span>
+                                    </td>
+                                    <td>
+                                        <span class="ms-3">{{ $diary->content }}</span>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="flex-fill border border-dark p-0">
-                <div class="border-bottom border-black py-2 text-center mb-3">
+                <div class="border-bottom border-black py-2 text-center">
                     <div class="fw-bold fs-4">userA</div>
                 </div>
-                <div class="inner-container mt-4 mx-auto">
-                    <div class="bg-secondary">
-                        a
-                    </div>
+                <div class="inner-container">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <td>日付</td>
+                            <td>感情ポイント</td>
+                            <td>出来事・気持ち</td>
+                        </thead>
+                        <tbody>
+                            @foreach ($diaries as $diary)
+                                <tr>
+                                    <td>
+                                        <span>{{ $diary->formatted_date }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ $diary->emotion_point }}点</span>
+                                    </td>
+                                    <td>
+                                        <span class="ms-3">{{ $diary->content }}</span>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

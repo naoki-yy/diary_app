@@ -34,6 +34,12 @@
                 <li class="nav-item">
                     <a class="nav-link text-white">Disabled</a>
                 </li>
+                <li class="nav-item">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="nav-link text-white">Logout</button>
+                    </form>
+                </li>
             </ul>
         </div>
     </header>

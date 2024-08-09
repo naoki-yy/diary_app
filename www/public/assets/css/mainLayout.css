@@ -9,3 +9,7 @@ body {
 .inner-container {
     width: 80%;
 }
+
+li {
+    list-style: none;
+}
