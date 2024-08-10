@@ -23,16 +23,10 @@
             <div class="fs-2 fw-bold text-light ps-3 ms-3">ココロ Diary . . .</div>
             <ul class="nav me-4">
                 <li class="nav-item">
-                    <a class="nav-link active text-white" href="#" aria-current="page">Active</a>
+                    <a class="nav-link active text-white" href="{{ route('top.init') }}" aria-current="page">Top</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white">Disabled</a>
+                    <a class="nav-link text-white" href="{{ route('top.chart') }}">Chart</a>
                 </li>
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">
