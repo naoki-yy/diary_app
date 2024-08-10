@@ -28,6 +28,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/top', [TopPageController::class, 'init'])->name('top.init');
     Route::post('/top/add', [TopPageController::class, 'add'])->name('top.add');
+
+    Route::post('/diary/{id}/edit', [TopPageController::class, 'update'])->name('diary.update');
+    Route::post('/diary/{id}/delete', [TopPageController::class, 'destroy'])->name('diary.delete');
 });
 
 require __DIR__ . '/auth.php';

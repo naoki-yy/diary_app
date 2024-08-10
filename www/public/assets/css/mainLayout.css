@@ -3,7 +3,7 @@ body {
 }
 
 .message-box {
-    height: 800px;
+    height: 600px;
 }
 
 .inner-container {
@@ -12,4 +12,8 @@ body {
 
 li {
     list-style: none;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }

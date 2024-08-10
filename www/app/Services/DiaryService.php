@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
-use App\Http\Requests\addDiaryRequest;
+use App\Http\Requests\DiaryRequest;
 use App\Models\Diary;
 use Illuminate\Support\Facades\Auth;
 
 class DiaryService
 {
-    public function addDiary(addDiaryRequest $request)
+    public function addDiary(DiaryRequest $request)
     {
         $diary = new Diary();
         $diary->user_id = Auth::user()->id;

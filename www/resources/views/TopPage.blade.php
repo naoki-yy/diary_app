@@ -44,25 +44,30 @@
                 <div class="border-bottom border-black py-2 text-center">
                     <div class="fw-bold fs-4">userB</div>
                 </div>
-                <div class="inner-container w-full">
-                    <table class="table table-hover table-bordered">
+                <div class="inner-container w-100">
+                    <table class="table table-hover">
                         <thead>
-                            <td>日付</td>
-                            <td>感情ポイント</td>
-                            <td>出来事・気持ち</td>
+                            <td class="text-center">日付</td>
+                            <td class="text-center">感情ポイント</td>
+                            <td class="text-center">出来事・気持ち</td>
+                            <td></td>
+                            <td></td>
                         </thead>
                         <tbody>
                             @foreach ($diaries as $diary)
                                 <tr>
-                                    <td>
+                                    <td class="text-center">
                                         <span>{{ $diary->formatted_date }}</span>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <span>{{ $diary->emotion_point }}点</span>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <span class="ms-3">{{ $diary->content }}</span>
                                     </td>
+                                    <td>
+                                    </td>
+                                    <td></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -73,26 +78,45 @@
                 <div class="border-bottom border-black py-2 text-center">
                     <div class="fw-bold fs-4">userA</div>
                 </div>
-                <div class="inner-container">
-                    <table class="table table-hover table-bordered">
+                <div class="inner-container w-100">
+                    <table class="table table-hover">
                         <thead>
-                            <td>日付</td>
-                            <td>感情ポイント</td>
-                            <td>出来事・気持ち</td>
+                            <td class="text-center">日付</td>
+                            <td class="text-center">感情ポイント</td>
+                            <td class="text-center">出来事・気持ち</td>
+                            <td></td>
+                            <td></td>
                         </thead>
                         <tbody>
-                            @foreach ($diaries as $diary)
-                                <tr>
-                                    <td>
-                                        <span>{{ $diary->formatted_date }}</span>
-                                    </td>
-                                    <td>
-                                        <span>{{ $diary->emotion_point }}点</span>
-                                    </td>
-                                    <td>
-                                        <span class="ms-3">{{ $diary->content }}</span>
-                                    </td>
-                                </tr>
+                            @foreach ($diaries as $index => $diary)
+                                <form action="{{ route('diary.update', $diary) }}" method="POST">
+                                    @csrf
+                                    <tr>
+                                        <td class="text-center">
+                                            <span>{{ $diary->formatted_date }}</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <span>{{ $diary->emotion_point }}点</span>
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="ms-3">{{ $diary->content }}</span>
+                                        </td>
+                                        <td>
+                                            <button type="submit"
+                                                style="background: none; border: none; padding: 0; margin: 0;">
+                                                <i class="bi bi-pencil-fill cursor-pointer">
+                                                </i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button type="submit"
+                                                style="background: none; border: none; padding: 0; margin: 0;">
+                                                <i class="bi bi-trash3 cursor-pointer">
+                                                </i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </form>
                             @endforeach
                         </tbody>
                     </table>
@@ -100,4 +124,19 @@
             </div>
         </div>
     </div>
+
+
+    @push('scripts')
+        <script>
+            function updateButton() {
+
+            }
+
+            function deleteButton(diaryId) {
+                // 削除ボタンがクリックされたときの処理
+                console.log('Delete Diary ID: ', diaryId);
+                // 実際の処理をここに記述
+            }
+        </script>
+    @endpush
 </x-layouts.mainLayout>
