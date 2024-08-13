@@ -28,11 +28,21 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ route('top.chart') }}">Chart</a>
                 </li>
-                <li class="nav-item">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button class="nav-link text-white">Logout</button>
-                    </form>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="mypageDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        マイページ
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="mypageDropdown">
+                        <li><a class="dropdown-item" href="{{ route('account.edit') }}">アカウント変更</a></li>
+                        <li><a class="dropdown-item" href="{{ route('invite.send') }}">招待コード送信</a></li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="dropdown-item">ログアウト</button>
+                            </form>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -45,10 +55,13 @@
             <div>&copy ココロDiary</div>
         </div>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.7/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
         integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     @stack('scripts')
 </body>
 
