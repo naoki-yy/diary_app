@@ -15,12 +15,6 @@ class TopPageController extends Controller
     {
         $diaries = Diary::orderBy('id', 'desc')->get();
 
-        $diaries->map(function ($diary) {
-            $diary->post_date = $diary->created_at->format('n/j');
-
-            return $diary;
-        });
-
         return view('TopPage', ['diaries' => $diaries]);
     }
 

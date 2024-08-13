@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ChartController;
+use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\TopPageController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,7 +20,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/diary/{diary}/edit', [TopPageController::class, 'edit'])->name('diary.update');
     Route::post('/diary/{diary}/delete', [TopPageController::class, 'destroy'])->name('diary.delete');
 
-    Route::get('/chart', [TopPageController::class, 'init'])->name('top.chart');
+    Route::get('/chart', [ChartController::class, 'init'])->name('top.chart');
+
+    Route::get('/account/edit', [UserController::class, 'init'])->name('account.edit');
+
+    Route::get('/invite/send', [InvitationController::class, 'init'])->name('invite.send');
+    Route::post('/invite/email', [InvitationController::class, 'send'])->name('invite.email');
+    // 招待コード受信後
+    Route::get('/invite/{code}', [InvitationController::class, 'accept'])->name('invitation.accept');
+
 });
 
 require __DIR__ . '/auth.php';

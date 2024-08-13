@@ -2,25 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DiaryRequest;
 use App\Models\Diary;
-use App\Services\DiaryService;
-use Exception;
-use Illuminate\Http\RedirectResponse;
+use Carbon\Carbon;
 use Illuminate\View\View;
 
 class ChartController extends Controller
 {
     public function init(): View
     {
-        $diaries = Diary::orderBy('id', 'desc')->get();
+        $oneMonthAgo = now()->subMonth();
+
+        $diaries = Diary::where('post_date', '>=', $oneMonthAgo)
+            ->orderBy('id', 'desc')
+            ->get();
 
         $diaries->map(function ($diary) {
-            $diary->post_date = $diary->created_at->format('n/j');
+            $diary->post_date = Carbon::parse($diary->post_date)->format('n/j');
 
             return $diary;
         });
 
-        return view('TopPage', ['diaries' => $diaries]);
+        $labels = $diaries->pluck('post_date')->unique()->values()->toArray();
+
+        // ラベル表示のための並び順を逆にする
+        $labels = array_reverse($labels);
+
+        $data = [];
+
+        foreach ($labels as $label) {
+            $data[] = $diaries->where('post_date', $label)->avg('emotion_point');
+        }
+
+        return view('Chart', ['diaries' => $diaries, 'data' => $data, 'labels' => $labels]);
     }
 }
