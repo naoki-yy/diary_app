@@ -16,6 +16,12 @@ use Illuminate\View\View;
 
 class InvitaionRegisteredUserController extends Controller
 {
+    /**
+     * 被招待者用新規登録処理
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function store(Request $request): RedirectResponse
     {
         $request->validate([

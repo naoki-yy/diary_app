@@ -4,18 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DiaryRequest;
 use App\Models\Diary;
+use App\Models\User;
 use App\Services\DiaryService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class TopPageController extends Controller
 {
+    /**
+     * 初期表示
+     *
+     * @return View
+     */
     public function init(): View
     {
-        $diaries = Diary::orderBy('id', 'desc')->get();
+        $diaries = Diary::where('user_id', Auth::id())
+                ->orderBy('id', 'desc')
+                ->get();
 
-        return view('TopPage', ['diaries' => $diaries]);
+        $share_user = User::query()
+                ->where('id', '!=', Auth::user()->id)
+                ->where('share_no', Auth::user()->share_no)
+                ->first();
+
+        $share_user_diaries = $share_user ? Diary::where('user_id', $share_user->id)
+            ->orderBy('id', 'desc')
+            ->get() : collect();
+
+        return view('TopPage', ['diaries' => $diaries, 'share_user' => $share_user, 'share_user_diaries' => $share_user_diaries]);
     }
 
     /**

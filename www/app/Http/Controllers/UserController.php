@@ -8,8 +8,5 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function init(): View
-    {
 
-    }
 }

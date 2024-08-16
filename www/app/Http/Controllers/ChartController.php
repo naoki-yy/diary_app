@@ -4,15 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Diary;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class ChartController extends Controller
 {
+    /**
+     * 折れ線グラフ表示
+     *
+     * @return View
+     */
     public function init(): View
     {
         $oneMonthAgo = now()->subMonth();
 
-        $diaries = Diary::where('post_date', '>=', $oneMonthAgo)
+        $diaries = Diary::where('user_id', Auth::id())
+            ->where('post_date', '>=', $oneMonthAgo)
             ->orderBy('id', 'desc')
             ->get();
 
