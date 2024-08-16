@@ -21,7 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'user_type'
+        'user_type',
+        'share_no'
     ];
 
     /**
@@ -47,5 +48,10 @@ class User extends Authenticatable
     public function diary()
     {
         return $this->hasMany(Diary::class);
+    }
+
+    public function inviter()
+    {
+        return $this->hasMany(Invitation::class);
     }
 }

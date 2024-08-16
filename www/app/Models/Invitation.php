@@ -15,4 +15,9 @@ class Invitation extends Model
         'invitee_email',
         'status'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'inviter_id');
+    }
 }

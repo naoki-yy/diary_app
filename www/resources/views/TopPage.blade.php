@@ -39,6 +39,9 @@
                 </div>
             </form>
         </div>
+
+
+
         <div class="d-flex my-3 message-box">
             <div class="flex-fill border border-dark p-0" style="overflow-y: auto;">
                 <div class="border-bottom border-black py-2 text-center bg-white"
@@ -78,7 +81,7 @@
             <div class="flex-fill border border-dark p-0" style="overflow-y: auto;">
                 <div class="border-bottom border-black py-2 text-center bg-white"
                     style="position: sticky; top: 0; height: 45px;">
-                    <div class="fw-bold fs-4">userA</div>
+                    <div class="fw-bold fs-4">{{ Auth::user()->name }}</div>
                 </div>
                 <div class="inner-container w-100">
                     <table class="table table-hover">

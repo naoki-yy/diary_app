@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\InviteUserMail;
 use App\Models\Invitation;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -24,6 +25,16 @@ class InvitationController extends Controller
             'email' => 'required|email',
         ]);
 
+        // 既に一人招待済みの場合は、これ以上の招待不可
+        $exist_share_no = User::query()
+                            ->where('id', '!=', Auth::user()->id)
+                            ->where('share_no', Auth::user()->share_no)
+                            ->exists();
+
+        if ($exist_share_no) {
+            return redirect()->route('invite.send')->with('error', '既に一度招待を行ったことがあります。');
+        }
+
         $invitation = new Invitation();
         $invitation->code = Str::random(10);
         $invitation->inviter_id = Auth::id();
@@ -43,12 +54,12 @@ class InvitationController extends Controller
             return redirect()->route('login')->with('error', 'この招待コードは無効です。');
         }
 
-        if (Auth::check()) {
-            // 既にログインしている場合、ダッシュボードなどにリダイレクトする
-            return redirect()->route('dashboard');
-        }
+        // if (Auth::check()) {
+        //     // 既にログインしている場合、ダッシュボードなどにリダイレクトする
+        //     return redirect()->route('dashboard');
+        // }
 
         // 招待者用のログインページへ
-        return view('auth.register', ['code' => $code]);
+        return view('auth.invitationRegister', ['invitaion_code' => $code]);
     }
 }
