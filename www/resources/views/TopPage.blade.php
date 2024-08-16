@@ -41,12 +41,14 @@
         </div>
 
 
-
         <div class="d-flex my-3 message-box">
+
+            {{-- 左側ボックス --}}
+            @if($share_user)
             <div class="flex-fill border border-dark p-0" style="overflow-y: auto;">
                 <div class="border-bottom border-black py-2 text-center bg-white"
                     style="position: sticky; top: 0; height: 45px;">
-                    <div class="fw-bold fs-4">userB</div>
+                    <div class="fw-bold fs-4">{{ $share_user->name }}</div>
                 </div>
                 <div class="inner-container w-100">
                     <table class="table table-hover">
@@ -58,16 +60,16 @@
                             <td></td>
                         </thead>
                         <tbody>
-                            @foreach ($diaries as $diary)
+                            @foreach ($share_user_diaries as $share_user_diary)
                                 <tr>
                                     <td class="text-center">
-                                        <span>{{ $diary->post_date }}</span>
+                                        <span>{{ $share_user_diary->post_date }}</span>
                                     </td>
                                     <td class="text-center">
-                                        <span>{{ $diary->emotion_point }}点</span>
+                                        <span>{{ $share_user_diary->emotion_point }}点</span>
                                     </td>
                                     <td class="text-center">
-                                        <span class="ms-3">{{ $diary->content }}</span>
+                                        <span class="ms-3">{{ $share_user_diary->content }}</span>
                                     </td>
                                     <td>
                                     </td>
@@ -78,6 +80,17 @@
                     </table>
                 </div>
             </div>
+            @else
+            <div class="flex-fill border border-dark p-0" style="overflow-y: auto;">
+                <div class="fs-6 text-center mt-5">
+                    交換日記をする相手がいません。<br>
+                    右上のマイページより招待コードを送信し、<br>
+                    交換日記を開始してください。
+                </div>
+            </div>
+            @endif
+
+            {{-- 右側ボックス --}}
             <div class="flex-fill border border-dark p-0" style="overflow-y: auto;">
                 <div class="border-bottom border-black py-2 text-center bg-white"
                     style="position: sticky; top: 0; height: 45px;">

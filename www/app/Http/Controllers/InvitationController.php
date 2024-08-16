@@ -19,6 +19,12 @@ class InvitationController extends Controller
         return view('Invitation');
     }
 
+    /**
+     * 招待メールの送信
+     *
+     * @param Request $request
+     * @return void
+     */
     public function send(Request $request)
     {
         $request->validate([
@@ -46,6 +52,12 @@ class InvitationController extends Controller
         return back()->with('success', '招待メールを送信しました');
     }
 
+    /**
+     * 招待受け入れ
+     *
+     * @param [type] $code
+     * @return void
+     */
     public function accept($code)
     {
         $invitation = Invitation::where('code', $code)->first();
@@ -54,10 +66,10 @@ class InvitationController extends Controller
             return redirect()->route('login')->with('error', 'この招待コードは無効です。');
         }
 
-        // if (Auth::check()) {
-        //     // 既にログインしている場合、ダッシュボードなどにリダイレクトする
-        //     return redirect()->route('dashboard');
-        // }
+        if (Auth::check()) {
+            // 既にログインしている場合、ダッシュボードなどにリダイレクトする
+            return redirect()->route('dashboard');
+        }
 
         // 招待者用のログインページへ
         return view('auth.invitationRegister', ['invitaion_code' => $code]);
