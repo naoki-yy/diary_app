@@ -43,12 +43,12 @@ class InvitationController extends Controller
             return redirect()->route('login')->with('error', 'この招待コードは無効です。');
         }
 
-        if (Auth::check()) {
-            // 既にログインしている場合、ダッシュボードなどにリダイレクトする
-            return redirect()->route('dashboard');
-        }
+        // if (Auth::check()) {
+        //     // 既にログインしている場合、ダッシュボードなどにリダイレクトする
+        //     return redirect()->route('dashboard');
+        // }
 
         // 招待者用のログインページへ
-        return view('auth.register', ['code' => $code]);
+        return view('auth.invitationRegister', ['invitaion_code' => $code]);
     }
 }

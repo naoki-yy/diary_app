@@ -26,8 +26,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/invite/send', [InvitationController::class, 'init'])->name('invite.send');
     Route::post('/invite/email', [InvitationController::class, 'send'])->name('invite.email');
-    // 招待コード受信後
-    Route::get('/invite/{code}', [InvitationController::class, 'accept'])->name('invitation.accept');
 
 });
 
