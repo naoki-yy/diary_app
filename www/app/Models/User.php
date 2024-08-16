@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Diary::class);
     }
+
+    public function inviter()
+    {
+        return $this->hasMany(Invitation::class);
+    }
 }

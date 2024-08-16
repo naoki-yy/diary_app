@@ -40,9 +40,17 @@ class InvitaionRegisteredUserController extends Controller
             }
 
             $invitation->status = 'accepted';
-
+            // 招待者
+            if ($invitation->inviter_id) {
+                $invitation_share_no = $invitation->user->share_no;
+            }
+            $user->share_no = $invitation_share_no;
             $user->user_type = 2;
         } else {
+            $max_share_no = User::max('share_no');
+            $next_share_no = $max_share_no ? $max_share_no + 1 : 1;
+
+            $user->share_no = $next_share_no;
             $user->user_type = 1;
         }
 
